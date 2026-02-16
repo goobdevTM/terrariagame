@@ -1,0 +1,18 @@
+{
+  "play_button": {
+    "x": 960.0,
+    "y": 600.0,
+    "scale": 4.0,
+    "size_x": 128,
+    "size_y": 32,
+    "text": "Play"
+  },
+  "settings_button": {
+    "x": 960.0,
+    "y": 800.0,
+    "scale": 4.0,
+    "size_x": 128,
+    "size_y": 32,
+    "text": "Settings"
+  }
+}
