@@ -14,6 +14,8 @@ extern sf::Vector2f mouse_pos;
 extern sf::RenderWindow window;
 extern std::string tex_path;
 extern std::string font_path;
+extern sf::Vector2f camera_pos;
+const uint max_button_array_size = 10000;
 
 void process();
 void start();

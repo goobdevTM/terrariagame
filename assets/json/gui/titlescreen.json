@@ -3,16 +3,32 @@
     "x": 960.0,
     "y": 600.0,
     "scale": 4.0,
-    "size_x": 128,
-    "size_y": 32,
+    "size_x": 128.0,
+    "size_y": 32.0,
     "text": "Play"
   },
-  "settings_button": {
+  "setttings_button": {
     "x": 960.0,
-    "y": 800.0,
+    "y": 760.0,
     "scale": 4.0,
-    "size_x": 128,
-    "size_y": 32,
+    "size_x": 128.0,
+    "size_y": 32.0,
     "text": "Settings"
+  },
+  "quit_button": {
+    "x": 960.0,
+    "y": 920.0,
+    "scale": 4.0,
+    "size_x": 128.0,
+    "size_y": 32.0,
+    "text": "Quit"
+  },
+  "website_button": {
+    "x": 64.0,
+    "y": 1016.0,
+    "scale": 4.0,
+    "size_x": 24.0,
+    "size_y": 24.0,
+    "text": ""
   }
 }

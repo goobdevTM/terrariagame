@@ -6,6 +6,8 @@
 #include "delta.hpp"
 #include "../include/json.hpp"
 
+extern sf::Font font;
+
 void load_from_json(std::string path);
 
 enum text_offsets {
@@ -16,28 +18,29 @@ enum text_offsets {
     BELOW
 };
 
+const int tex_size = 16;
+const int corner_size = 7;
+const int middle_size = tex_size - (corner_size*2);
+const std::string button_tex_path = "../assets/textures/gui/button.png";
+//LEFT TO RIGHT, TOP TO BOTTOM
+const sf::Texture textures[9] = {
+
+    sf::Texture(button_tex_path, false, sf::IntRect({0, 0}, {corner_size, corner_size})), //TOP LEFT
+    sf::Texture(button_tex_path, false, sf::IntRect({corner_size, 0}, {middle_size, corner_size})), //TOP MIDDLE
+    sf::Texture(button_tex_path, false, sf::IntRect({corner_size + middle_size, 0}, {corner_size, corner_size})), //TOP RIGHT
+
+    sf::Texture(button_tex_path, false, sf::IntRect({0, corner_size}, {corner_size, middle_size})), //MIDDLE LEFT
+    sf::Texture(button_tex_path, false, sf::IntRect({corner_size, corner_size}, {middle_size, middle_size})), //MIDDLE MIDDLE
+    sf::Texture(button_tex_path, false, sf::IntRect({corner_size + middle_size, corner_size}, {corner_size, middle_size})), //MIDDLE RIGHT
+
+    sf::Texture(button_tex_path, false, sf::IntRect({0, corner_size + middle_size}, {corner_size, corner_size})), //BOTTOM LEFT
+    sf::Texture(button_tex_path, false, sf::IntRect({corner_size, corner_size + middle_size}, {middle_size, corner_size})), //BOTTOM MIDDLE
+    sf::Texture(button_tex_path, false, sf::IntRect({corner_size + middle_size, corner_size + middle_size}, {corner_size, corner_size})) //BOTTOM RIGHT
+
+}; 
+
+
 class Button {
-    int tex_size = 16;
-    int corner_size = 7;
-    int middle_size = tex_size - (corner_size*2);
-    std::string tex_path = "../assets/textures/gui/button.png";
-    //LEFT TO RIGHT, TOP TO BOTTOM
-    sf::Texture textures[9] = {
-
-        sf::Texture(tex_path, false, sf::IntRect({0, 0}, {corner_size, corner_size})), //TOP LEFT
-        sf::Texture(tex_path, false, sf::IntRect({corner_size, 0}, {middle_size, corner_size})), //TOP MIDDLE
-        sf::Texture(tex_path, false, sf::IntRect({corner_size + middle_size, 0}, {corner_size, corner_size})), //TOP RIGHT
-
-        sf::Texture(tex_path, false, sf::IntRect({0, corner_size}, {corner_size, middle_size})), //MIDDLE LEFT
-        sf::Texture(tex_path, false, sf::IntRect({corner_size, corner_size}, {middle_size, middle_size})), //MIDDLE MIDDLE
-        sf::Texture(tex_path, false, sf::IntRect({corner_size + middle_size, corner_size}, {corner_size, middle_size})), //MIDDLE RIGHT
-
-        sf::Texture(tex_path, false, sf::IntRect({0, corner_size + middle_size}, {corner_size, corner_size})), //BOTTOM LEFT
-        sf::Texture(tex_path, false, sf::IntRect({corner_size, corner_size + middle_size}, {middle_size, corner_size})), //BOTTOM MIDDLE
-        sf::Texture(tex_path, false, sf::IntRect({corner_size + middle_size, corner_size + middle_size}, {corner_size, corner_size})) //BOTTOM RIGHT
-
-    }; 
-
     sf::Sprite sprites[9] = {
         sf::Sprite(textures[0]),
         sf::Sprite(textures[1]),
@@ -59,11 +62,10 @@ class Button {
     std::string text;
     int font_size;
     int outline_size;
-    const sf::Font font = sf::Font("../assets/fonts/Ithaca.ttf");
-    sf::Text text_object = sf::Text(font, "", font_size);
     text_offsets text_offset;
     bool scale_text = true;
     float text_detail = 4.f;
+    sf::Text text_object = sf::Text(font, "", 32);
     AABB collision = {0,0,0,0};
     bool evil_mouse_down = false;
     sf::Vector3f animated_color_float = {0.f,0.f,0.f};
@@ -123,7 +125,6 @@ class Button {
         void setSize(sf::Vector2f new_size) {
             true_size = new_size;
             size = sf::Vector2f(float(new_size.x - corner_size*2)/float(middle_size),float(new_size.y - corner_size*2)/float(middle_size));
-            std::cout << "Size x: " << size.x << " Size y: " << size.y << "\n";
             setPosition(getPosition());
         }
         sf::Vector2f getSize(bool with_scale = false) {
@@ -193,6 +194,9 @@ class Button {
                     break;
             }
         }
+        std::string getText() {
+            return text;
+        }
         void draw(sf::RenderWindow &window) {
             for (uint i = 0; i < 9; ++i) {
                 window.draw(sprites[i]);
@@ -200,11 +204,36 @@ class Button {
             window.draw(text_object);
         }
         void animateColor(sf::Color to_color, float lerp_speed) {
+            float biggernum[3] = {0.0f, 0.0f, 0.0f};
+            float smallernum[3] = {0.0f, 0.0f, 0.0f};
+            for (uint i = 0; i < 3; ++i) {
+                float a = 0;
+                float b = 0;
+                if (i == 0) {a = animated_color_float.x; b = to_color.r;}
+                if (i == 1) {a = animated_color_float.y; b = to_color.g;}
+                if (i == 2) {a = animated_color_float.z; b = to_color.b;}
+                if (a > b) {
+                    biggernum[i] = a;
+                    smallernum[i] = b;
+                } else {
+                    biggernum[i] = b;
+                    smallernum[i] = a;
+                }
+            }
             animated_color_float = sf::Vector3f(std::lerp(animated_color_float.x, float(to_color.r), float(delta) * lerp_speed), std::lerp(animated_color_float.y, float(to_color.g), float(delta) * lerp_speed), std::lerp(animated_color_float.z, float(to_color.b), float(delta) * lerp_speed));
-            setColor(sf::Color(std::clamp(int(animated_color_float.x), 0, 255), std::clamp(int(animated_color_float.y), 0, 255), std::clamp(int(animated_color_float.z), 0, 255)), false);
+            setColor(sf::Color(int(std::clamp(float(animated_color_float.x), smallernum[0], biggernum[0])), int(std::clamp(float(animated_color_float.y), smallernum[1], biggernum[1])), int(std::clamp(float(animated_color_float.z), smallernum[2], biggernum[2]))), false);
         }
         void animateScale(sf::Vector2f to_scale, float lerp_speed) {
-            animated_scale = sf::Vector2f(std::lerp(animated_scale.x, to_scale.x, delta * lerp_speed), std::lerp(animated_scale.y, to_scale.y, delta * lerp_speed));
+            float biggernum = 0.0f;
+            float smallernum = 0.0f;
+            if (to_scale.x > scale.x) {
+                biggernum = to_scale.x;
+                smallernum = scale.x;
+            } else {
+                biggernum = scale.x;
+                smallernum = to_scale.x;
+            }
+            animated_scale = sf::Vector2f(std::clamp(float(std::lerp(animated_scale.x, to_scale.x, delta * lerp_speed)), smallernum, biggernum), std::clamp(float(std::lerp(animated_scale.y, to_scale.y, delta * lerp_speed)), smallernum, biggernum));
             setScale(animated_scale, false);
         }
         void process() {
@@ -237,5 +266,8 @@ class Button {
             }
         }
 };
+
+extern Button current_json_buttons[max_button_array_size];
+
 
 #endif //GUI_HPP

@@ -1,0 +1,7 @@
+{
+    "blocks": [
+        {"name": "Air", "empty": true},
+        {"name": "Dirt", "coords": [0,0]},
+        {"name": "Grass", "coords": [0,0]}
+    ]
+}

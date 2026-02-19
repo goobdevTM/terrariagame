@@ -11,7 +11,9 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/glaggle/Documents/terrariagame/src/data.cpp" "CMakeFiles/main.dir/src/data.cpp.o" "gcc" "CMakeFiles/main.dir/src/data.cpp.o.d"
   "/home/glaggle/Documents/terrariagame/src/delta.cpp" "CMakeFiles/main.dir/src/delta.cpp.o" "gcc" "CMakeFiles/main.dir/src/delta.cpp.o.d"
   "/home/glaggle/Documents/terrariagame/src/gui.cpp" "CMakeFiles/main.dir/src/gui.cpp.o" "gcc" "CMakeFiles/main.dir/src/gui.cpp.o.d"
+  "/home/glaggle/Documents/terrariagame/src/input.cpp" "CMakeFiles/main.dir/src/input.cpp.o" "gcc" "CMakeFiles/main.dir/src/input.cpp.o.d"
   "/home/glaggle/Documents/terrariagame/src/main.cpp" "CMakeFiles/main.dir/src/main.cpp.o" "gcc" "CMakeFiles/main.dir/src/main.cpp.o.d"
+  "/home/glaggle/Documents/terrariagame/src/world.cpp" "CMakeFiles/main.dir/src/world.cpp.o" "gcc" "CMakeFiles/main.dir/src/world.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
