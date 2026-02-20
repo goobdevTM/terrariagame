@@ -1,8 +1,7 @@
 CMakeFiles/main.dir/src/world.cpp.o: \
  /home/glaggle/Documents/terrariagame/src/world.cpp \
  /usr/include/stdc-predef.h \
- /home/glaggle/Documents/terrariagame/src/world.hpp \
- /home/glaggle/Documents/terrariagame/src/data.hpp \
+ /home/glaggle/Documents/terrariagame/src/blocks.hpp \
  /home/glaggle/Documents/terrariagame/_deps/sfml-src/include/SFML/Graphics.hpp \
  /home/glaggle/Documents/terrariagame/_deps/sfml-src/include/SFML/Graphics/BlendMode.hpp \
  /home/glaggle/Documents/terrariagame/_deps/sfml-src/include/SFML/Graphics/Export.hpp \
@@ -313,6 +312,8 @@ CMakeFiles/main.dir/src/world.cpp.o: \
  /home/glaggle/Documents/terrariagame/_deps/sfml-src/include/SFML/System/InputStream.hpp \
  /home/glaggle/Documents/terrariagame/_deps/sfml-src/include/SFML/System/MemoryInputStream.hpp \
  /home/glaggle/Documents/terrariagame/_deps/sfml-src/include/SFML/System/Sleep.hpp \
+ /home/glaggle/Documents/terrariagame/src/world.hpp \
+ /home/glaggle/Documents/terrariagame/src/data.hpp \
  /usr/include/c++/13/iostream /usr/include/c++/13/algorithm \
  /usr/include/c++/13/bits/ranges_algo.h \
  /usr/include/c++/13/pstl/glue_algorithm_defs.h /usr/include/c++/13/cmath \

@@ -2,6 +2,7 @@
 #include "gui.hpp"
 #include "world.hpp"
 #include "input.hpp"
+#include "blocks.hpp"
 
 Button my_buttons[max_button_array_size] = {};
 
@@ -22,6 +23,7 @@ int main()
 	fps_counter.setCharacterSize(32);
 	fps_counter.setPosition({8,8});
 	start();
+	load_blocks();
 	load_from_json("../assets/json/gui/titlescreen.json");
 	for (uint i = 0; i < max_button_array_size; ++i) {
 		Button button;
@@ -91,8 +93,8 @@ int main()
 		window.clear(hex_to_color("#41a6e9ff"));
 		
 		
-		for (int x = -1; x < ceil(chunks_x / float(scale)); ++x) {
-			for (int y = -1; y < ceil(chunks_y / float(scale)); ++y) {
+		for (int x = -1; x < ceil(chunks_x / float(scale)) + 1; ++x) {
+			for (int y = -1; y < ceil(chunks_y / float(scale)) + 1; ++y) {
 				sf::Vector2i camera_chunk_pos = {int(camera_pos.x / (16.f * float(chunk_size) * scale)) + x, int(camera_pos.y / (16.f * float(chunk_size) * scale)) + y};
 				if (not world.contains(camera_chunk_pos)) {
 					generate_chunk(camera_chunk_pos);

@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/main.dir/src/blocks.cpp.o"
+  "CMakeFiles/main.dir/src/blocks.cpp.o.d"
   "CMakeFiles/main.dir/src/data.cpp.o"
   "CMakeFiles/main.dir/src/data.cpp.o.d"
   "CMakeFiles/main.dir/src/delta.cpp.o"

@@ -19,8 +19,8 @@ extern float scale;
 extern const float chunks_x;
 extern const float chunks_y;
 
-const uint chunk_size = 16;
-extern std::unordered_map<sf::Vector2i, std::array<uint, chunk_size * chunk_size>, Vector2iHash> world;
+const int chunk_size = 16;
+extern std::unordered_map<sf::Vector2i, std::array<int, chunk_size * chunk_size>, Vector2iHash> world;
 
 void generate_chunk(sf::Vector2i chunk_pos);
 

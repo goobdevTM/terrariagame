@@ -11,7 +11,7 @@ std::string tex_path = "../assets/textures/";
 std::string font_path = "../assets/fonts/";
 sf::Vector2f camera_pos = {0.f,0.f};
 sf::Vector2f input_dir = {0.f,0.f};
-const float camera_speed = 1024.f;
+const float camera_speed = 2048.f;
 sf::Vector2f target_camera_pos = {0.f,0.f};
 
 void start() {

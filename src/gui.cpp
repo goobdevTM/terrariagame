@@ -25,7 +25,6 @@ void load_from_json(std::string path) {
 
 
     // Iterate over an array
-    std::cout << "Buttons:" << std::endl;
     uint i = 0;
     for (const auto& json_button : data.items()) {
         Button button;
