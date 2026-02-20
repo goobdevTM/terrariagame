@@ -95,7 +95,7 @@ void render_chunk(sf::Vector2i chunk_pos, sf::RenderWindow &window)
         for (float x = 0; x < chunk_size; ++x)
         {
             block_id = get_block({(chunk_pos.x * 16) + int(x), (chunk_pos.y * 16) + int(y)});
-            new_sprite = sprites[block_id];
+            new_sprite.setTextureRect({blocks[block_id].atlas_coords.x, blocks[block_id].atlas_coords.y}, {16,16});
             new_sprite.setScale({scale + 0.001f, scale + 0.001f});
             new_sprite.setPosition({((x * scale * 16) - camera_pos.x) + (chunk_pos.x*(chunk_size*scale*16)), ((y * scale * 16) - camera_pos.y) + (chunk_pos.y*(chunk_size*scale*16))});
             if (not blocks[block_id].empty) {
