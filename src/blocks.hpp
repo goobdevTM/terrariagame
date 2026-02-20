@@ -18,7 +18,7 @@ class Block {
 extern Block blocks[750];
 
 extern const sf::Texture tex_atlas;
-extern std::vector<sf::Vector2i> sprite_coords;
+extern std::vector<sf::IntRect> sprite_coords;
 
 extern void load_blocks();
 
