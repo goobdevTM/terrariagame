@@ -12,10 +12,8 @@ Block blocks[750] = {};
 
 const sf::Texture tex_atlas(tex_path + "blocks/atlas.png");
 
-std::vector<sf::Sprite> sprites = {};
-
-sf::Sprite new_block_sprite(tex_atlas);
-
+std::vector<sf::IntRect> sprite_coords = {};
+sf::IntRect new_atlas_coords;
 void load_blocks() {
     // Open the JSON file
     std::ifstream f(path);
@@ -43,11 +41,10 @@ void load_blocks() {
         
         if (not new_block.empty) {
             new_block.atlas_coords = {json_block.value()["atlas_x"].get<int>(), json_block.value()["atlas_y"].get<int>()};
-            std::cout << new_block_sprite.getTextureRect().position.x << ", " << new_block_sprite.getTextureRect().position.y << "\n";
-            new_block_sprite.setTextureRect(sf::IntRect({new_block.atlas_coords.x * 16, new_block.atlas_coords.y * 16}, {16,16}));
+            new_atlas_coords = sf::IntRect({new_block.atlas_coords.x * 16, new_block.atlas_coords.y * 16}, {16,16});
         }
         
-        sprites.push_back(new_block_sprite);
+        sprite_coords.push_back(new_atlas_coords);
         blocks[i] = new_block;
         i++;
     }
