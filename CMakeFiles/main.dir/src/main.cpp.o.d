@@ -362,4 +362,11 @@ CMakeFiles/main.dir/src/main.cpp.o: \
  /usr/include/c++/13/pstl/glue_numeric_defs.h /usr/include/c++/13/any \
  /home/glaggle/Documents/terrariagame/src/world.hpp \
  /home/glaggle/Documents/terrariagame/src/input.hpp \
- /home/glaggle/Documents/terrariagame/src/blocks.hpp
+ /home/glaggle/Documents/terrariagame/src/blocks.hpp \
+ /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
+ /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
+ /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
+ /usr/include/c++/13/bits/atomic_timed_wait.h \
+ /usr/include/c++/13/bits/this_thread_sleep.h \
+ /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
+ /usr/include/x86_64-linux-gnu/bits/semaphore.h

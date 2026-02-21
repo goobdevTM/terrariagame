@@ -5,14 +5,19 @@
 #include <cmath>
 
 
+
 float scale = 4.f;
 
 const float chunks_x = 5.f;
 const float chunks_y = 5.f;
 
 
+
 std::unordered_map<sf::Vector2i, std::array<int, chunk_size * chunk_size>, Vector2iHash> world;
 std::unordered_map<sf::Vector2i, std::array<bool, chunk_size * chunk_size>, Vector2iHash> random_texture_world;
+
+std::unordered_map<sf::Vector2i, std::array<int, chunk_size * chunk_size>, Vector2iHash> render_world;
+std::unordered_map<sf::Vector2i, std::array<bool, chunk_size * chunk_size>, Vector2iHash> render_random_texture_world;
 
 sf::Vector2i get_chunk_pos(sf::Vector2i world_pos) {
     return {int(floor(float(world_pos.x) / 16.f)), int(floor(float(world_pos.y) / 16.f))};

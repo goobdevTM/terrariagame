@@ -3,6 +3,7 @@
 #include "world.hpp"
 #include "input.hpp"
 #include "blocks.hpp"
+#include <thread>
 
 Button my_buttons[max_button_array_size] = {};
 
@@ -14,6 +15,20 @@ void draw_buttons() {
 		Button button = my_buttons[i];
 		my_buttons[i].process();
 		my_buttons[i].draw(window);
+	}
+}
+
+void world_and_chunk() {
+	while (window.isOpen()) {
+		for (int x = -3; x < ceil(chunks_x / float(scale)) + 3; ++x) {
+			for (int y = -3; y < ceil(chunks_y / float(scale)) + 3; ++y) {
+				sf::Vector2i camera_chunk_pos = {int(camera_pos.x / (16.f * float(chunk_size) * scale)) + x, int(camera_pos.y / (16.f * float(chunk_size) * scale)) + y};
+				if (not world.contains(camera_chunk_pos)) {
+					generate_chunk(camera_chunk_pos);
+				}
+			}
+		}
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	}
 }
 
@@ -38,6 +53,7 @@ int main()
 		button.draw(window);
 		my_buttons[i] = button;
 	}
+	std::thread thr1(world_and_chunk);
 	while (window.isOpen())
 	{
 		calculate_delta();
@@ -90,21 +106,32 @@ int main()
 		}
 		
 		//button.setSize(sf::Vector2f(std::clamp(mouse_pos.x / button.getScale().x, 14.f, 256.f), std::clamp(mouse_pos.y / button.getScale().y, 14.f, 256.f)));
-		window.clear(hex_to_color("#41a6e9ff"));
-		
-		
-		for (int x = -1; x < ceil(chunks_x / float(scale)) + 1; ++x) {
-			for (int y = -1; y < ceil(chunks_y / float(scale)) + 1; ++y) {
+		bool has_all_chunks = true;
+		for (int x = 0; x < ceil(chunks_x / float(scale)); ++x) {
+			for (int y = 0; y < ceil(chunks_y / float(scale)); ++y) {
 				sf::Vector2i camera_chunk_pos = {int(camera_pos.x / (16.f * float(chunk_size) * scale)) + x, int(camera_pos.y / (16.f * float(chunk_size) * scale)) + y};
 				if (not world.contains(camera_chunk_pos)) {
-					generate_chunk(camera_chunk_pos);
+					has_all_chunks = false;
+					break;
 				}
-				render_chunk(camera_chunk_pos, window);
+			}
+			if (not has_all_chunks) {
+				break;
 			}
 		}
+		if (has_all_chunks) { 
+			//DRAW (IF ALL CHUNKS ARE READY AND ABLE TO DRAW)
+			window.clear(hex_to_color("#41a6e9ff"));
 			
-		//draw_buttons();
-		window.draw(fps_counter);
-		window.display();
+			//draw_buttons();
+			for (int x = -1; x < ceil(chunks_x / float(scale)) + 1; ++x) {
+				for (int y = -1; y < ceil(chunks_y / float(scale)) + 1; ++y) {
+					sf::Vector2i camera_chunk_pos = {int(camera_pos.x / (16.f * float(chunk_size) * scale)) + x, int(camera_pos.y / (16.f * float(chunk_size) * scale)) + y};
+					render_chunk(camera_chunk_pos, window);
+				}
+			}
+			window.draw(fps_counter);
+			window.display();
+		}
 	}
 }

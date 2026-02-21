@@ -1654,6 +1654,7 @@ CMakeFiles/main.dir/src/main.cpp.o: src/main.cpp \
   /usr/include/c++/13/algorithm \
   /usr/include/c++/13/any \
   /usr/include/c++/13/array \
+  /usr/include/c++/13/atomic \
   /usr/include/c++/13/backward/auto_ptr.h \
   /usr/include/c++/13/backward/binders.h \
   /usr/include/c++/13/bit \
@@ -1664,6 +1665,7 @@ CMakeFiles/main.dir/src/main.cpp.o: src/main.cpp \
   /usr/include/c++/13/bits/allocator.h \
   /usr/include/c++/13/bits/atomic_base.h \
   /usr/include/c++/13/bits/atomic_lockfree_defines.h \
+  /usr/include/c++/13/bits/atomic_timed_wait.h \
   /usr/include/c++/13/bits/atomic_wait.h \
   /usr/include/c++/13/bits/basic_ios.h \
   /usr/include/c++/13/bits/basic_ios.tcc \
@@ -1735,6 +1737,7 @@ CMakeFiles/main.dir/src/main.cpp.o: src/main.cpp \
   /usr/include/c++/13/bits/ranges_util.h \
   /usr/include/c++/13/bits/refwrap.h \
   /usr/include/c++/13/bits/requires_hosted.h \
+  /usr/include/c++/13/bits/semaphore_base.h \
   /usr/include/c++/13/bits/shared_ptr.h \
   /usr/include/c++/13/bits/shared_ptr_atomic.h \
   /usr/include/c++/13/bits/shared_ptr_base.h \
@@ -1744,6 +1747,7 @@ CMakeFiles/main.dir/src/main.cpp.o: src/main.cpp \
   /usr/include/c++/13/bits/std_abs.h \
   /usr/include/c++/13/bits/std_function.h \
   /usr/include/c++/13/bits/std_mutex.h \
+  /usr/include/c++/13/bits/std_thread.h \
   /usr/include/c++/13/bits/stl_algo.h \
   /usr/include/c++/13/bits/stl_algobase.h \
   /usr/include/c++/13/bits/stl_bvector.h \
@@ -1768,6 +1772,7 @@ CMakeFiles/main.dir/src/main.cpp.o: src/main.cpp \
   /usr/include/c++/13/bits/streambuf_iterator.h \
   /usr/include/c++/13/bits/string_view.tcc \
   /usr/include/c++/13/bits/stringfwd.h \
+  /usr/include/c++/13/bits/this_thread_sleep.h \
   /usr/include/c++/13/bits/uniform_int_dist.h \
   /usr/include/c++/13/bits/unique_ptr.h \
   /usr/include/c++/13/bits/unordered_map.h \
@@ -1835,13 +1840,16 @@ CMakeFiles/main.dir/src/main.cpp.o: src/main.cpp \
   /usr/include/c++/13/pstl/pstl_config.h \
   /usr/include/c++/13/ranges \
   /usr/include/c++/13/ratio \
+  /usr/include/c++/13/semaphore \
   /usr/include/c++/13/span \
   /usr/include/c++/13/sstream \
   /usr/include/c++/13/stdexcept \
+  /usr/include/c++/13/stop_token \
   /usr/include/c++/13/streambuf \
   /usr/include/c++/13/string \
   /usr/include/c++/13/string_view \
   /usr/include/c++/13/system_error \
+  /usr/include/c++/13/thread \
   /usr/include/c++/13/tr1/bessel_function.tcc \
   /usr/include/c++/13/tr1/beta_function.tcc \
   /usr/include/c++/13/tr1/ell_integral.tcc \
@@ -1877,6 +1885,7 @@ CMakeFiles/main.dir/src/main.cpp.o: src/main.cpp \
   /usr/include/math.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
+  /usr/include/semaphore.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
@@ -1924,6 +1933,7 @@ CMakeFiles/main.dir/src/main.cpp.o: src/main.cpp \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
   /usr/include/x86_64-linux-gnu/bits/sched.h \
   /usr/include/x86_64-linux-gnu/bits/select.h \
+  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
   /usr/include/x86_64-linux-gnu/bits/setjmp.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
@@ -1992,6 +2002,7 @@ CMakeFiles/main.dir/src/main.cpp.o: src/main.cpp \
   /usr/include/x86_64-linux-gnu/sys/select.h \
   /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
   /usr/include/x86_64-linux-gnu/sys/syscall.h \
+  /usr/include/x86_64-linux-gnu/sys/time.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
@@ -2409,6 +2420,22 @@ CMakeFiles/main.dir/src/world.cpp.o: src/world.cpp \
 
 
 src/world.cpp:
+
+/usr/include/x86_64-linux-gnu/sys/time.h:
+
+/usr/include/x86_64-linux-gnu/bits/semaphore.h:
+
+/usr/include/c++/13/stop_token:
+
+/usr/include/c++/13/semaphore:
+
+/usr/include/c++/13/bits/this_thread_sleep.h:
+
+/usr/include/c++/13/bits/semaphore_base.h:
+
+/usr/include/c++/13/bits/atomic_timed_wait.h:
+
+/usr/include/c++/13/atomic:
 
 src/input.cpp:
 
@@ -2886,6 +2913,8 @@ _deps/sfml-src/include/SFML/Graphics/Drawable.hpp:
 
 /usr/include/c++/13/bits/stream_iterator.h:
 
+/usr/include/semaphore.h:
+
 _deps/sfml-src/include/SFML/Window/Keyboard.hpp:
 
 _deps/sfml-src/include/SFML/Graphics/Image.hpp:
@@ -3035,6 +3064,8 @@ _deps/sfml-src/include/SFML/System/InputStream.hpp:
 /usr/include/c++/13/cerrno:
 
 _deps/sfml-src/include/SFML/System/Time.hpp:
+
+/usr/include/c++/13/thread:
 
 /usr/include/c++/13/bits/max_size_type.h:
 
@@ -3287,6 +3318,8 @@ src/data.hpp:
 include/json.hpp:
 
 /usr/include/c++/13/format:
+
+/usr/include/c++/13/bits/std_thread.h:
 
 /usr/include/limits.h:
 
