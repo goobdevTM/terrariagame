@@ -2,6 +2,7 @@
 #define WORLD_HPP
 
 #include "data.hpp" 
+#include <functional>
 
 struct Vector2iHash
 {
@@ -21,6 +22,7 @@ extern const float chunks_y;
 
 const int chunk_size = 16;
 extern std::unordered_map<sf::Vector2i, std::array<int, chunk_size * chunk_size>, Vector2iHash> world;
+extern std::unordered_map<sf::Vector2i, std::array<bool, chunk_size * chunk_size>, Vector2iHash> random_texture_world;
 
 void generate_chunk(sf::Vector2i chunk_pos);
 

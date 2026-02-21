@@ -2,6 +2,7 @@
 #include "delta.hpp"
 #include "input.hpp"
 #include <cmath>
+#include <random>
 
 bool mouse_down = false;
 bool mouse_just_clicked = false;
@@ -11,8 +12,18 @@ std::string tex_path = "../assets/textures/";
 std::string font_path = "../assets/fonts/";
 sf::Vector2f camera_pos = {0.f,0.f};
 sf::Vector2f input_dir = {0.f,0.f};
-const float camera_speed = 2048.f;
+const float camera_speed = 1024.f;
 sf::Vector2f target_camera_pos = {0.f,0.f};
+uint _rand_calls = 0;
+int randi_range(int min, int max) {
+    _rand_calls += 1;
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::mt19937 gen(seed + _rand_calls); 
+
+    std::uniform_int_distribution<int> dist(min, max);
+
+    return dist(gen);
+}
 
 void start() {
     //WINDOW SETUP
@@ -26,7 +37,7 @@ void process() {
     mouse_pos = sf::Vector2f(float(mouse_pos.x) / (float(window.getSize().x) / 1920.0f), float(mouse_pos.y) / (float(window.getSize().y) / 1080.0f));
 
     input_dir = {float(right_pressed) - float(left_pressed), float(down_pressed) - float(up_pressed)};
-    target_camera_pos += {input_dir.x * camera_speed * delta, input_dir.y * camera_speed * delta};
+    target_camera_pos += {input_dir.x * camera_speed * float(delta), input_dir.y * camera_speed * float(delta)};
     camera_pos = {float(std::lerp(camera_pos.x, target_camera_pos.x, delta * 20.0)), float(std::lerp(camera_pos.y, target_camera_pos.y, delta * 20.0))};
 }
 

@@ -20,6 +20,9 @@ const int max_button_array_size = 10000;
 void process();
 void start();
 sf::Color hex_to_color(std::string hex);
+extern uint _rand_calls;
+int randi_range(int min, int max);
+    
 
 struct AABB
 {

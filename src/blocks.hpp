@@ -13,12 +13,12 @@ class Block {
         std::string name = "Unnamed Block";
         bool empty = false;
         sf::Vector2i atlas_coords = {};
+        bool has_variants = false;
 };
 
 extern Block blocks[750];
 
 extern const sf::Texture tex_atlas;
-extern std::vector<sf::IntRect> sprite_coords;
 
 extern void load_blocks();
 
