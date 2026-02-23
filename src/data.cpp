@@ -15,6 +15,10 @@ sf::Vector2f input_dir = {0.f,0.f};
 const float camera_speed = 1024.f;
 sf::Vector2f target_camera_pos = {0.f,0.f};
 uint _rand_calls = 0;
+
+const sf::Texture player_tex(tex_path + "player.png");
+sf::Sprite player(player_tex, sf::IntRect({0,0}, {16,16}));
+
 int randi_range(int min, int max) {
     _rand_calls += 1;
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();

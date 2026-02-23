@@ -8,6 +8,9 @@
 Button my_buttons[max_button_array_size] = {};
 
 sf::Text fps_counter(font);
+sf::Text debug_text(font);
+
+int hovered_block = 0;
 
 void draw_buttons() {
 	for (uint i = 0; i < max_button_array_size; ++i) {
@@ -18,25 +21,20 @@ void draw_buttons() {
 	}
 }
 
-void world_and_chunk() {
-	while (window.isOpen()) {
-		for (int x = -3; x < ceil(chunks_x / float(scale)) + 3; ++x) {
-			for (int y = -3; y < ceil(chunks_y / float(scale)) + 3; ++y) {
-				sf::Vector2i camera_chunk_pos = {int(camera_pos.x / (16.f * float(chunk_size) * scale)) + x, int(camera_pos.y / (16.f * float(chunk_size) * scale)) + y};
-				if (not world.contains(camera_chunk_pos)) {
-					generate_chunk(camera_chunk_pos);
-				}
-			}
-		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(1));
-	}
-}
+
+
 
 int main()
 {
 	fps_counter.setOutlineThickness(4);
 	fps_counter.setCharacterSize(32);
 	fps_counter.setPosition({8,8});
+	debug_text.setOutlineThickness(4);
+	debug_text.setCharacterSize(32);
+	debug_text.setPosition({8,40});
+	player.setOrigin({8,8});
+	player.setPosition({960,540});
+	player.setScale({scale,scale});
 	start();
 	load_blocks();
 	load_from_json("../assets/json/gui/titlescreen.json");
@@ -57,7 +55,7 @@ int main()
 	while (window.isOpen())
 	{
 		calculate_delta();
-		fps_counter.setString(std::to_string(int(fps)));
+		fps_counter.setString("FPS: " + std::to_string(int(fps)));
 		mouse_just_clicked = false;
 		process();
 		while ( const std::optional event = window.pollEvent() )
@@ -104,7 +102,6 @@ int main()
 				{right_pressed = false;}
             }
 		}
-		
 		//button.setSize(sf::Vector2f(std::clamp(mouse_pos.x / button.getScale().x, 14.f, 256.f), std::clamp(mouse_pos.y / button.getScale().y, 14.f, 256.f)));
 		bool has_all_chunks = true;
 		for (int x = 0; x < ceil(chunks_x / float(scale)); ++x) {
@@ -119,7 +116,21 @@ int main()
 				break;
 			}
 		}
-		if (has_all_chunks) { 
+		//if (has_all_chunks) { 
+			
+			int selected_block_type = 2;
+			sf::Vector2i block_cursor_pos = {floor((camera_pos.x + mouse_pos.x) / (16.f * scale)), floor((camera_pos.y + mouse_pos.y) / (16.f * scale))};
+			hovered_block = get_block(block_cursor_pos);
+			bool can_place = (not (hovered_block == selected_block_type));
+			debug_text.setString(\
+				"Hovering block: " + blocks[hovered_block].name + " (id: " + std::to_string(hovered_block) + ")\n" \
+				"Can place: " + std::to_string(can_place) + "\n" \
+			);
+			if (mouse_down) {
+				if (can_place) {
+					set_block(block_cursor_pos, selected_block_type);		
+				}
+			}
 			//DRAW (IF ALL CHUNKS ARE READY AND ABLE TO DRAW)
 			window.clear(hex_to_color("#41a6e9ff"));
 			
@@ -127,11 +138,13 @@ int main()
 			for (int x = -1; x < ceil(chunks_x / float(scale)) + 1; ++x) {
 				for (int y = -1; y < ceil(chunks_y / float(scale)) + 1; ++y) {
 					sf::Vector2i camera_chunk_pos = {int(camera_pos.x / (16.f * float(chunk_size) * scale)) + x, int(camera_pos.y / (16.f * float(chunk_size) * scale)) + y};
-					render_chunk(camera_chunk_pos, window);
+					render_chunk(camera_chunk_pos);
 				}
 			}
+			window.draw(player);
 			window.draw(fps_counter);
+			window.draw(debug_text);
 			window.display();
-		}
+		//}
 	}
 }

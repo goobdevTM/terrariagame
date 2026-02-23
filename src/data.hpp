@@ -23,6 +23,8 @@ sf::Color hex_to_color(std::string hex);
 extern uint _rand_calls;
 int randi_range(int min, int max);
     
+extern const sf::Texture player_tex;
+extern sf::Sprite player;
 
 struct AABB
 {

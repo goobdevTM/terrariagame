@@ -24,13 +24,16 @@ const int chunk_size = 16;
 extern std::unordered_map<sf::Vector2i, std::array<int, chunk_size * chunk_size>, Vector2iHash> world;
 extern std::unordered_map<sf::Vector2i, std::array<bool, chunk_size * chunk_size>, Vector2iHash> random_texture_world;
 
-extern std::unordered_map<sf::Vector2i, std::array<int, chunk_size * chunk_size>, Vector2iHash> render_world;
-extern std::unordered_map<sf::Vector2i, std::array<bool, chunk_size * chunk_size>, Vector2iHash> render_random_texture_world;
-
 void generate_chunk(sf::Vector2i chunk_pos);
 
-void set_block(sf::Vector2i world_pos);
+void set_block(sf::Vector2i world_pos, int block_id);
 
-extern void render_chunk(sf::Vector2i chunk_pos, sf::RenderWindow &window);
+int get_block(sf::Vector2i world_pos);
+
+extern void world_and_chunk();
+extern void world_and_chunk_b();
+
+
+extern void render_chunk(sf::Vector2i chunk_pos);
 
 #endif //WORLD_HPP

@@ -3,7 +3,7 @@
         {"name": "Air", "empty": true},
         {"name": "Dirt", "atlas_x": 0, "atlas_y": 0, "has_variants": true},
         {"name": "Grass", "atlas_x": 1, "atlas_y": 0, "has_variants": true},
-        {"name": "Stone", "atlas_x": 2, "atlas_y": 0},
+        {"name": "Stone", "atlas_x": 2, "atlas_y": 0, "has_variants": true},
         {"name": "rock under stone", "atlas_x": 3, "atlas_y": 0}
     ]
 }
