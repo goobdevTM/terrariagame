@@ -22,6 +22,7 @@ extern const sf::Texture tex_atlas;
 
 extern void load_blocks();
 
+extern uint amount_of_blocks;
 
 
 #endif // BLOCKS_HPP

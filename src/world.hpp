@@ -26,7 +26,7 @@ extern std::unordered_map<sf::Vector2i, std::array<bool, chunk_size * chunk_size
 
 void generate_chunk(sf::Vector2i chunk_pos);
 
-void set_block(sf::Vector2i world_pos, int block_id);
+void set_block(sf::Vector2i world_pos, int block_id, bool do_update = true);
 
 int get_block(sf::Vector2i world_pos);
 

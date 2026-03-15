@@ -26,6 +26,7 @@ void draw_buttons() {
 
 int main()
 {
+	int selected_block_type = 2;
 	fps_counter.setOutlineThickness(4);
 	fps_counter.setCharacterSize(32);
 	fps_counter.setPosition({8,8});
@@ -77,6 +78,20 @@ int main()
                     mouse_down = false;
                 }
             }
+			if (const auto* mouseScrolled = event->getIf<sf::Event::MouseWheelScrolled>())
+            {
+				if (mouseScrolled->delta > 0) {
+					selected_block_type += 1;
+				} else if (mouseScrolled->delta < 0)
+				{
+					selected_block_type -= 1;
+				}
+				if (selected_block_type >= amount_of_blocks) {
+					selected_block_type = 0;
+				} else if (selected_block_type < 0) {
+					selected_block_type = amount_of_blocks - 1;
+				}
+            }
 			if (const auto* key = event->getIf<sf::Event::KeyPressed>())
             {
 				//PRESS KEY DOWN
@@ -118,11 +133,12 @@ int main()
 		}
 		//if (has_all_chunks) { 
 			
-			int selected_block_type = 2;
+			
 			sf::Vector2i block_cursor_pos = {floor((camera_pos.x + mouse_pos.x) / (16.f * scale)), floor((camera_pos.y + mouse_pos.y) / (16.f * scale))};
 			hovered_block = get_block(block_cursor_pos);
 			bool can_place = (not (hovered_block == selected_block_type));
 			debug_text.setString(\
+				"Selected block: " + blocks[selected_block_type].name + " (id: " + std::to_string(selected_block_type) + ")\n" \
 				"Hovering block: " + blocks[hovered_block].name + " (id: " + std::to_string(hovered_block) + ")\n" \
 				"Can place: " + std::to_string(can_place) + "\n" \
 			);
@@ -134,7 +150,7 @@ int main()
 			//DRAW (IF ALL CHUNKS ARE READY AND ABLE TO DRAW)
 			window.clear(hex_to_color("#41a6e9ff"));
 			
-			//draw_buttons();
+			
 			for (int x = -1; x < ceil(chunks_x / float(scale)) + 1; ++x) {
 				for (int y = -1; y < ceil(chunks_y / float(scale)) + 1; ++y) {
 					sf::Vector2i camera_chunk_pos = {int(camera_pos.x / (16.f * float(chunk_size) * scale)) + x, int(camera_pos.y / (16.f * float(chunk_size) * scale)) + y};
@@ -144,7 +160,9 @@ int main()
 			window.draw(player);
 			window.draw(fps_counter);
 			window.draw(debug_text);
+			//draw_buttons();
 			window.display();
+			
 		//}
 	}
 }

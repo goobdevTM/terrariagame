@@ -239,6 +239,30 @@ sfml-audio/fast:
 	$(MAKE) $(MAKESILENT) -f _deps/sfml-build/src/SFML/Audio/CMakeFiles/sfml-audio.dir/build.make _deps/sfml-build/src/SFML/Audio/CMakeFiles/sfml-audio.dir/build
 .PHONY : sfml-audio/fast
 
+src/block_updates.o: src/block_updates.cpp.o
+.PHONY : src/block_updates.o
+
+# target to build an object file
+src/block_updates.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/block_updates.cpp.o
+.PHONY : src/block_updates.cpp.o
+
+src/block_updates.i: src/block_updates.cpp.i
+.PHONY : src/block_updates.i
+
+# target to preprocess a source file
+src/block_updates.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/block_updates.cpp.i
+.PHONY : src/block_updates.cpp.i
+
+src/block_updates.s: src/block_updates.cpp.s
+.PHONY : src/block_updates.s
+
+# target to generate assembly for a file
+src/block_updates.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/block_updates.cpp.s
+.PHONY : src/block_updates.cpp.s
+
 src/blocks.o: src/blocks.cpp.o
 .PHONY : src/blocks.o
 
@@ -425,6 +449,9 @@ help:
 	@echo "... sfml-network"
 	@echo "... sfml-system"
 	@echo "... sfml-window"
+	@echo "... src/block_updates.o"
+	@echo "... src/block_updates.i"
+	@echo "... src/block_updates.s"
 	@echo "... src/blocks.o"
 	@echo "... src/blocks.i"
 	@echo "... src/blocks.s"

@@ -10,6 +10,8 @@ using json = nlohmann::json;
 
 Block blocks[750] = {};
 
+uint amount_of_blocks = 0;
+
 const sf::Texture tex_atlas(tex_path + "blocks/atlas.png");
 
 
@@ -47,5 +49,7 @@ void load_blocks() {
 
         blocks[i] = new_block;
         i++;
+        amount_of_blocks ++;
     }
+    
 }

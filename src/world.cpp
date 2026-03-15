@@ -1,5 +1,6 @@
 #include "blocks.hpp"
 #include "world.hpp"
+#include "block_updates.hpp"
 #include <vector>
 #include <unordered_map>
 #include <cmath>
@@ -40,13 +41,20 @@ void init_chunk(sf::Vector2i chunk_pos)
     }
 }
 
-void set_block(sf::Vector2i world_pos, int block_id)
+void set_block(sf::Vector2i world_pos, int block_id, bool do_update)
 {
     sf::Vector2i chunk_pos = get_chunk_pos(world_pos);
     if (world.contains(chunk_pos)) {
         sf::Vector2i local_pos = get_local_pos(world_pos, chunk_pos);
+        int old_block_id = get_block(world_pos);
         world[chunk_pos][xy_to_int(local_pos)] = block_id;
-        random_texture_world[chunk_pos][xy_to_int(local_pos)] = randi_range(0,1);
+        if (do_update) {
+            int event = 0;
+            if (not block_id == 5 and old_block_id == 5) {
+                event = update_events::WOOD_LOG_BREAK;
+            }
+            update_block(world_pos, true, event);
+        }
     }
 }
 
@@ -100,6 +108,7 @@ void generate_chunk(sf::Vector2i chunk_pos)
             if (y > 256) {
                 set_block({x,y}, 4); //DEEP STONE
             }
+            random_texture_world[chunk_pos][xy_to_int({local_x, local_y})] = randi_range(0,1);
         }
     }
 }
@@ -138,7 +147,7 @@ void render_chunk(sf::Vector2i chunk_pos)
                 if (sprite_pos.x >= -scale * 16 and sprite_pos.x <= 1920 + (scale * 16) and sprite_pos.y >= -scale * 16 and sprite_pos.y <= 1080 + (scale * 16))
                 {
                     if (blocks[block_id].has_variants) {
-                            rand_type = get_block_randomness(world_pos);
+                        rand_type = get_block_randomness(world_pos);
                     }
                     new_sprite.setScale({scale + 0.001f, scale + 0.001f});
                     new_sprite.setPosition(sprite_pos);
