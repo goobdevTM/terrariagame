@@ -14,6 +14,9 @@ class Block {
         bool empty = false;
         sf::Vector2i atlas_coords = {};
         bool has_variants = false;
+        bool has_overlay = false;
+        sf::Vector2i overlay_atlas_coords = {};
+        int drop = 0;
 };
 
 extern Block blocks[750];
@@ -22,7 +25,7 @@ extern const sf::Texture tex_atlas;
 
 extern void load_blocks();
 
-extern uint amount_of_blocks;
+extern int amount_of_blocks;
 
 
 #endif // BLOCKS_HPP

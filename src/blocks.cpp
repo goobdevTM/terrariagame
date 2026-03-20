@@ -10,7 +10,7 @@ using json = nlohmann::json;
 
 Block blocks[750] = {};
 
-uint amount_of_blocks = 0;
+int amount_of_blocks = 0;
 
 const sf::Texture tex_atlas(tex_path + "blocks/atlas.png");
 
@@ -39,9 +39,20 @@ void load_blocks() {
         if (json_block.value().contains("empty")) {
             new_block.empty = json_block.value()["empty"].get<bool>();
         }
-        
+        if (json_block.value().contains("has_overlay")) {
+            new_block.has_overlay = json_block.value()["has_overlay"].get<bool>();
+        }
+        if (json_block.value().contains("drop")) {
+            new_block.drop = json_block.value()["drop"].get<int>();
+        } else {
+            new_block.drop = i;
+        }
+
         if (not new_block.empty) {
             new_block.atlas_coords = {json_block.value()["atlas_x"].get<int>(), json_block.value()["atlas_y"].get<int>()};
+            if (new_block.has_overlay) {
+                new_block.overlay_atlas_coords = {json_block.value()["overlay_atlas_x"].get<int>(), json_block.value()["overlay_atlas_y"].get<int>()};
+            }
             if (json_block.value().contains("has_variants")) {
                 new_block.has_variants = json_block.value()["has_variants"].get<bool>();
             }

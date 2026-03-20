@@ -102,7 +102,7 @@ void generate_chunk(sf::Vector2i chunk_pos)
             if (y > 16) {
                 set_block({x,y}, 1); //DIRT
             }
-            if (y > 32) {
+            if (y > 32 + randi_range(0,3)) {
                 set_block({x,y}, 3); //STONE
             }
             if (y > 256) {
@@ -146,13 +146,28 @@ void render_chunk(sf::Vector2i chunk_pos)
                 sprite_pos = {((x * scale * 16) - camera_pos.x) + (chunk_pos.x*(chunk_size*scale*16)), ((y * scale * 16) - camera_pos.y) + (chunk_pos.y*(chunk_size*scale*16))};
                 if (sprite_pos.x >= -scale * 16 and sprite_pos.x <= 1920 + (scale * 16) and sprite_pos.y >= -scale * 16 and sprite_pos.y <= 1080 + (scale * 16))
                 {
+                    new_sprite.setPosition(sprite_pos);
                     if (blocks[block_id].has_variants) {
                         rand_type = get_block_randomness(world_pos);
                     }
-                    new_sprite.setScale({scale + 0.001f, scale + 0.001f});
-                    new_sprite.setPosition(sprite_pos);
+                    if (blocks[get_block({world_pos.x + 1, world_pos.y + 1})].empty or blocks[get_block({world_pos.x + 1, world_pos.y})].empty or blocks[get_block({world_pos.x, world_pos.y + 1})].empty) {
+                        new_sprite.setScale({scale * 1.125f, scale * 1.125f});
+                        new_sprite.setTextureRect(sf::IntRect({blocks[block_id].atlas_coords.x * 16, (blocks[block_id].atlas_coords.y + rand_type) * 16}, {16,16}));
+                        new_sprite.setColor({180,180,200});
+                        window.draw(new_sprite);
+                        if (blocks[block_id].has_overlay) {
+                            new_sprite.setTextureRect(sf::IntRect({blocks[block_id].overlay_atlas_coords.x * 16, (blocks[block_id].overlay_atlas_coords.y + rand_type) * 16}, {16,16}));
+                            window.draw(new_sprite);
+                        }
+                    }
+                    new_sprite.setColor(sf::Color::White);
+                    new_sprite.setScale({scale + 0.002f, scale + 0.002f});
                     new_sprite.setTextureRect(sf::IntRect({blocks[block_id].atlas_coords.x * 16, (blocks[block_id].atlas_coords.y + rand_type) * 16}, {16,16}));
                     window.draw(new_sprite);
+                    if (blocks[block_id].has_overlay) {
+                        new_sprite.setTextureRect(sf::IntRect({blocks[block_id].overlay_atlas_coords.x * 16, (blocks[block_id].overlay_atlas_coords.y + rand_type) * 16}, {16,16}));
+                        window.draw(new_sprite);
+                    }
                 }
             } 
         }

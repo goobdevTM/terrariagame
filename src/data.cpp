@@ -6,6 +6,8 @@
 
 bool mouse_down = false;
 bool mouse_just_clicked = false;
+bool right_mouse_down = false;
+bool right_mouse_just_clicked = false;
 sf::Vector2f mouse_pos = {0.f,0.f};
 sf::RenderWindow window;
 std::string tex_path = "../assets/textures/";
@@ -15,6 +17,8 @@ sf::Vector2f input_dir = {0.f,0.f};
 const float camera_speed = 1024.f;
 sf::Vector2f target_camera_pos = {0.f,0.f};
 uint _rand_calls = 0;
+bool paused = false;
+Gamemodes gamemode = Gamemodes::SURVIVAL;
 
 const sf::Texture player_tex(tex_path + "player.png");
 sf::Sprite player(player_tex, sf::IntRect({0,0}, {16,16}));
@@ -39,10 +43,11 @@ void start() {
 void process() {
     mouse_pos = sf::Vector2f(sf::Mouse::getPosition(window));
     mouse_pos = sf::Vector2f(float(mouse_pos.x) / (float(window.getSize().x) / 1920.0f), float(mouse_pos.y) / (float(window.getSize().y) / 1080.0f));
-
-    input_dir = {float(right_pressed) - float(left_pressed), float(down_pressed) - float(up_pressed)};
-    target_camera_pos += {input_dir.x * camera_speed * float(delta), input_dir.y * camera_speed * float(delta)};
-    camera_pos = {float(std::lerp(camera_pos.x, target_camera_pos.x, delta * 20.0)), float(std::lerp(camera_pos.y, target_camera_pos.y, delta * 20.0))};
+    if (not paused) {
+        input_dir = {float(right_pressed) - float(left_pressed), float(down_pressed) - float(up_pressed)};
+        target_camera_pos += {input_dir.x * camera_speed * float(delta), input_dir.y * camera_speed * float(delta)};
+        camera_pos = {float(std::lerp(camera_pos.x, target_camera_pos.x, delta * 20.0)), float(std::lerp(camera_pos.y, target_camera_pos.y, delta * 20.0))};
+    }
 }
 
 sf::Color hex_to_color(std::string hex) {

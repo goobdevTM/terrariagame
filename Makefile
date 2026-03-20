@@ -383,6 +383,30 @@ src/input.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/input.cpp.s
 .PHONY : src/input.cpp.s
 
+src/inventory.o: src/inventory.cpp.o
+.PHONY : src/inventory.o
+
+# target to build an object file
+src/inventory.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/inventory.cpp.o
+.PHONY : src/inventory.cpp.o
+
+src/inventory.i: src/inventory.cpp.i
+.PHONY : src/inventory.i
+
+# target to preprocess a source file
+src/inventory.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/inventory.cpp.i
+.PHONY : src/inventory.cpp.i
+
+src/inventory.s: src/inventory.cpp.s
+.PHONY : src/inventory.s
+
+# target to generate assembly for a file
+src/inventory.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/inventory.cpp.s
+.PHONY : src/inventory.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -467,6 +491,9 @@ help:
 	@echo "... src/input.o"
 	@echo "... src/input.i"
 	@echo "... src/input.s"
+	@echo "... src/inventory.o"
+	@echo "... src/inventory.i"
+	@echo "... src/inventory.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

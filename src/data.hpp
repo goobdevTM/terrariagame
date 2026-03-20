@@ -8,14 +8,22 @@
 
 //Basic data structures, variables and functions
 
+enum Gamemodes {
+    SURVIVAL = 0,
+    SANDBOX = 1
+};
+
 extern bool mouse_down;
 extern bool mouse_just_clicked;
+extern bool right_mouse_down;
+extern bool right_mouse_just_clicked;
 extern sf::Vector2f mouse_pos;
 extern sf::RenderWindow window;
 extern std::string tex_path;
 extern std::string font_path;
 extern sf::Vector2f camera_pos;
-const int max_button_array_size = 10000;
+const int max_button_array_size = 500;
+extern Gamemodes gamemode;
 
 void process();
 void start();
@@ -25,6 +33,8 @@ int randi_range(int min, int max);
     
 extern const sf::Texture player_tex;
 extern sf::Sprite player;
+
+extern bool paused;
 
 struct AABB
 {

@@ -11,6 +11,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/src/gui.cpp.o.d"
   "CMakeFiles/main.dir/src/input.cpp.o"
   "CMakeFiles/main.dir/src/input.cpp.o.d"
+  "CMakeFiles/main.dir/src/inventory.cpp.o"
+  "CMakeFiles/main.dir/src/inventory.cpp.o.d"
   "CMakeFiles/main.dir/src/main.cpp.o"
   "CMakeFiles/main.dir/src/main.cpp.o.d"
   "CMakeFiles/main.dir/src/world.cpp.o"
